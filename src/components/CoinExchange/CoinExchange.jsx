@@ -1,58 +1,58 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 function CoinExchange() {
-    const dispatch = useDispatch()
-    const [sell, setSell] = useState(null)
-    const [buy, setBuy] = useState(null)
+    const dispatch = useDispatch();
+    const [sell, setSell] = useState(null);
+    const [buy, setBuy] = useState(null);
     const [isSellOpen, setIsSellOpen] = useState(false);
-    const [isBuyOpen, setIsBuyOpen] = useState(false)
-    const [targetedCurrencies, setTargetedCurrencies] = useState([])
-    const [sellAmount, setSellAmount] = useState(null)
+    const [isBuyOpen, setIsBuyOpen] = useState(false);
+    const [targetedCurrencies, setTargetedCurrencies] = useState([]);
+    const [sellAmount, setSellAmount] = useState(null);
     const [buyAmount, setBuyAmount] = useState(0);
     const [sellDetails, setSellDetails] = useState({});
     const [buyDetails, setBuyDetails] = useState({});
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
 
     const togglingSell = () => {
-        setIsSellOpen((prev) => !prev)
-    }
+        setIsSellOpen((prev) => !prev);
+    };
     const togglingBuy = () => {
-        setIsBuyOpen((prev) => !prev)
-    }
+        setIsBuyOpen((prev) => !prev);
+    };
 
     const selectBuyCurrency = (currency) => {
         setBuy(currency);
-        setIsBuyOpen((prev) => !prev)
-    }
+        setIsBuyOpen((prev) => !prev);
+    };
 
     const selectSellCurrency = (currency) => {
         setSell(currency);
-        setIsSellOpen((prev) => !prev)
-    }
+        setIsSellOpen((prev) => !prev);
+    };
 
     useEffect(() => {
         const getExchangeRate = async () => {
             try {
-                const myCurrencies = await axios.get('https://api.coingecko.com/api/v3/exchange_rates')
-                setTargetedCurrencies(myCurrencies.data.rates)
+                const myCurrencies = await axios.get('https://api.coingecko.com/api/v3/exchange_rates');
+                setTargetedCurrencies(myCurrencies.data.rates);
             } catch (err) {
-                console.error("Error fetching exchange rates: ", err)
+                console.error('Error fetching exchange rates: ', err);
             }
-        }
+        };
         getExchangeRate();
-    }, [dispatch])
+    }, [dispatch]);
 
     const HandleClick = () => {
         if (sell && buy && sellAmount && sellDetails && buyDetails) {
-            const sellValue = parseFloat(sellAmount) * parseFloat(sellDetails.value)
-            const buyAmt = sellValue / parseFloat(buyDetails.value)
-            setBuyAmount(buyAmt.toFixed(2));
+            const sellValue = parseFloat(sellAmount) * parseFloat(sellDetails.value); // Convert sellAmount to base currency (e.g., USD)
+            const buyAmt = sellValue * parseFloat(buyDetails.value); // Convert base currency amount to buy currency
+            setBuyAmount(buyAmt.toFixed(6)); // Set buyAmount with correct precision
         } else {
-            setError(true)
+            setError(true);
         }
-    }
+    };
 
     return (
         <div className="mt-2 xl:w-1/2 h-64 max-sm:px-3 px-8 py-3 bg-white shadow-sm transition ease-in-out hover:ring-4 ring-blue-400 ring-offset-slate-50 rounded-md">
@@ -69,7 +69,7 @@ function CoinExchange() {
                                     onClick={togglingSell}
                                     className="w-full rounded-l-md px-4 max-sm:px-2 font-medium max-sm:text-xs max-md:text-sm lg:text-base cursor-pointer"
                                 >
-                                    {sell || "Currency"}
+                                    {sell || 'Currency'}
                                 </div>
                                 <div onClick={togglingSell} className="h-full max-sm:w-[40px] relative">
                                     <button
@@ -130,7 +130,7 @@ function CoinExchange() {
                                     onClick={togglingBuy}
                                     className="w-full rounded-l-md px-4 max-sm:px-2 font-medium max-sm:text-xs max-md:text-sm lg:text-base cursor-pointer"
                                 >
-                                    {buy || "Currency"}
+                                    {buy || 'Currency'}
                                 </div>
                                 <div onClick={togglingBuy} className="h-full w-[60px] relative">
                                     <button
@@ -185,7 +185,7 @@ function CoinExchange() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default CoinExchange
+export default CoinExchange;

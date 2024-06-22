@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { CoinList } from '../api/api';
-import { CryptoState } from '../CryptoContext';
 import { useDispatch, useSelector } from 'react-redux';
 
 function CryptoSidebar() {
@@ -9,6 +8,8 @@ function CryptoSidebar() {
     const [coins, setCoins] = useState([]);
     const [loading, setLoading] = useState(false);
     const currency = useSelector((state)=>state.currentCountry)
+    console.log(currency)
+    
     const getSymbol = (currency) => {
         switch (currency) {
             case 'USD':
@@ -39,7 +40,7 @@ function CryptoSidebar() {
 
     useEffect(() => {
         fetchCoin();
-    }, [currency]);
+    }, [currency,dispatch]);
 
     if (loading) {
         return <div>Loading...</div>;

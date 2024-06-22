@@ -1,5 +1,5 @@
 export const CoinList = (currency) =>
-  `https://tusharoxacular09.github.io/cryptocurrency_api/api.json`;
+  `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}`;
 
 export const SingleCoin = (id) =>
   `https://api.coingecko.com/api/v3/coins/${id}`;

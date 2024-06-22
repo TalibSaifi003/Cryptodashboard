@@ -1,6 +1,6 @@
 
 const INIT_CRYPTOCURRENCY = "Bitcoin";
-const INIT_CURRENCY = "INR";
+const INIT_CURRENCY = "USD";
 const NO_OF_DAYS = 365;
 const CHART_TYPE = "Line-Chart";
 const INIT_ERROR = false;
