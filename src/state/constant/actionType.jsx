@@ -1,0 +1,7 @@
+export const CRYPTO_CURRENCY = "CRYPTO_CURRENCY";
+export const COUNTRY_CURRENCY = "COUNTRY_CURRENCY";
+export const NUMBER_OF_DAYS = "NUMBER_OF_DAYS";
+export const CHART_TYPE ="CHART_TYPE";
+export const NETWORK_ERROR = "NETWORK_ERROR";
+
+

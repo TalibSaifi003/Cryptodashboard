@@ -1,0 +1,36 @@
+.dropdown-toggle::after {
+
+    margin-left: 2.255em;
+}
+.nav-section{
+    border-radius: 15px;
+}
+.coin-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.coin-info {
+    display: flex;
+    align-items: center;
+}
+
+.coin-image {
+    margin-right: 8px;
+}
+
+.coin-name {
+    font-weight: bold;
+}
+
+.coin-marketcap {
+    margin-top: 4px;
+    color: gray;
+}
+
+.price-change {
+    display: flex;
+    align-items: center;
+}
